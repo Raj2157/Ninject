@@ -1,4 +1,4 @@
-// Copyright 2011, Stefano Ricciardi - www.stefanoricciardi.com
+﻿// Copyright 2011, Stefano Ricciardi - www.stefanoricciardi.com
 //
 // This is free software; you can redistribute it and/or modify it
 // under the terms of the GNU Lesser General Public License as
@@ -13,9 +13,27 @@
 // You should have received a copy of the GNU Lesser General Public
 // License along with this software; if not, write to the Free
 // Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
-// 02110-1301 USA, or see the FSF site: http://www.fsf.org.using System;
+// 02110-1301 USA, or see the FSF site: http://www.fsf.org.
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using Ninject;
 
-What you need to run the tests:
+namespace Accounting
+{
+    public class TaxCalculator : ITaxCalculator
+    {
+        private readonly decimal _rate;
 
-1. Download Ninject from http://http://ninject.org/
-2. Download xUnit from http://xunit.codeplex.com/
+        public TaxCalculator(decimal rate)              
+        {
+            _rate = rate;
+        }
+
+        public decimal CalculateTax(decimal amount)
+        {
+            return Math.Round(_rate * amount, 2);
+        }
+    }
+}
